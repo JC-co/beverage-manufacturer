@@ -1,0 +1,30 @@
+manufacture
+
+Product:
+
+beverage stock = (num)
+
+beverage price = num - [increase] [decrease]
+
+demand = (num) per hour
+
+
+Storage:
+
+containers amount = (num) - [increase] [decrease]
+
+liquid amount = (num) - [increase] [decrease]
+
+
+Costs:
+
+container cost = (num)
+
+liquid cost = (num)
+
+
+Money:
+
+(NUM)
+
+
