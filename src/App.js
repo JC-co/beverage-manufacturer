@@ -17,7 +17,9 @@ class App extends React.Component {
     money: 1,
   };
 
-  priceAdd10() {
+  // N.B: when using "this" use an arrow function!
+
+  priceAdd10 = () => {
     this.setState((currentState) => {
       const newPrice = currentState.bevPrice + 0.1;
       const newState = { bevPrice: newPrice };
@@ -25,7 +27,7 @@ class App extends React.Component {
     });
   }
 
-  priceSubtract10() {
+  priceSubtract10 = () => {
     this.setState((currentState) => {
       const newPrice = currentState.bevPrice - 0.1;
       const newState = { bevPrice: newPrice };
@@ -33,7 +35,7 @@ class App extends React.Component {
     });
   }
 
-  increaseContainersAmount() {
+  increaseContainersAmount = () => {
     this.setState((currentState) => {
       const newAmount = currentState.containersAmount + 10;
       const newState = { containersAmount: newAmount };
@@ -41,7 +43,7 @@ class App extends React.Component {
     });
   }
 
-  increaseLiquidAmount() {
+  increaseLiquidAmount = () => {
     this.setState((currentState) => {
       const newAmount = currentState.liquidAmount + 10;
       const newState = { liquidAmount: newAmount };
@@ -49,19 +51,15 @@ class App extends React.Component {
     });
   }
 
-  increaseStock() {
+  increaseStock = () => {
     this.setState((currentState) => {
       if (currentState.containersAmount > 0 && currentState.liquidAmount > 0) {
-        const newContainerState = currentState.containersAmount - 1;
-        const newLiquidState = currentState.liquidAmount - 1;
-        const newStockState = currentState.bevStock + 1;
-
-        const newState = {
-          containersAmount: newContainerState,
-          liquidAmount: newLiquidState,
-          bevStock: newStockState,
+        const newStock = {
+          containersAmount: currentState.containersAmount - 1,
+          liquidAmount: currentState.liquidAmount - 1,
+          bevStock: currentState.bevStock + 1,
         };
-        return newState;
+        return newStock;
       }
     });
   }
@@ -70,13 +68,27 @@ class App extends React.Component {
     setInterval(this.increaseStock, 1000);
   }
 
-  //demandRate();
+  demandRate = () => {
+    this.setState(currentState => {
+        const newRate = currentState.demand + 1
+        const newState = {
+          demand: newRate
+        };
+        return newState;
+    })
+  }
+  
+  demandReduction() {
+    setInterval(this.demandRate, 1000);
+  };
 
   reset() {
     localStorage.clear("state");
+    
+    // Figure out how to reset to default numbers on site
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.stockUpdate();
 
     const localState = localStorage.getItem("state");
